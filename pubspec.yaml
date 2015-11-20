@@ -1,14 +1,16 @@
 name: btree
-description: A starting point for Dart libraries or applications.
-version: 0.0.1
-#author: Your Name <email@example.com>
-#homepage: https://www.example.com
+description: An in-memory B-Tree implementation
+version: 0.1.0
+author: Kwang Yul Seo <kwangyul.seo@gmail.com>
+homepage: https://github.com/kseo/btree
 
 environment:
   sdk: '>=1.0.0 <2.0.0'
 
-#dependencies:
-#  lib_name: any
+dependencies:
+  quiver_collection: '>=1.0.0-dev.1 <1.1.0'
+  quiver_check: '>=1.0.0-dev.1 <1.1.0'
+  tuple: '>=0.4.0 <0.5.0'
 
 dev_dependencies:
   test: '>=0.12.0 <0.13.0'
