@@ -8,6 +8,9 @@ which in some cases yields better memory usage and/or performance.
 
 The API is based on [BTree implementation for Go][btree-go]
 
+[![Build Status](https://travis-ci.org/kseo/btree.svg)](https://travis-ci.org/kseo/btree)
+[![Coverage Status](https://coveralls.io/repos/kseo/btree/badge.svg?branch=master&service=github)](https://coveralls.io/github/kseo/btree?branch=master)
+
 [btree-go]: https://godoc.org/github.com/google/btree
 
 ## Usage
