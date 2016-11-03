@@ -6,7 +6,7 @@ library btree.test;
 import 'package:btree/btree.dart';
 import 'package:test/test.dart';
 
-dynamic identity(dynamic a) => a;
+int identity(int a) => a;
 
 /// Returns an ordered list of int items in the range [0, n).
 List<int> rang(int n) => new List<int>.generate(n, identity);
@@ -16,7 +16,7 @@ List<int> perm(int n) => rang(n)..shuffle();
 
 /// Extracts all items from a tree in order as a list.
 List<int> all(BTree<int> t) {
-  final out = [];
+  List<int> out = [];
   t.ascend((item) {
     out.add(item);
     return true;
@@ -107,7 +107,7 @@ void main() {
       expect(got, equals(rang(100).sublist(0, 60)));
       got.clear();
       btree.ascendLessThan(60, (a) {
-        if (a > 50) {
+        if (a.compareTo(50) > 0) {
           return false;
         }
         got.add(a);
@@ -129,7 +129,7 @@ void main() {
       expect(got, equals(rang(100).sublist(40)));
       got.clear();
       btree.ascendGreaterOrEqual(40, (a) {
-        if (a > 50) {
+        if (a.compareTo(50) > 0) {
           return false;
         }
         got.add(a);

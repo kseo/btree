@@ -20,7 +20,7 @@ class BTree<T extends Comparable> {
 
   int _length = 0;
 
-  _Node _root;
+  _Node<T> _root;
 
   /// Returns `true` if the tree has no items in it.
   bool get isEmpty => _length == 0;
@@ -68,7 +68,7 @@ class BTree<T extends Comparable> {
         ..items.add(item2)
         ..children.addAll([oldRoot, second]);
     }
-    final out = _root.insert(item, _maxItems);
+    T out = _root.insert(item, _maxItems);
     if (out == null) {
       _length++;
     }
@@ -110,7 +110,7 @@ class BTree<T extends Comparable> {
 
   /// Calls the iterator for every value in the tree within the range
   /// [greaterOrEqual, lessThan), until iterator returns false.
-  void ascendRange(T greaterOrEqual, T lessThan, ItemIterator iterator) {
+  void ascendRange(T greaterOrEqual, T lessThan, ItemIterator<T> iterator) {
     if (_root == null) return;
     _root.iterate((T a) => a.compareTo(greaterOrEqual) >= 0,
         (T a) => a.compareTo(lessThan) < 0, iterator);
@@ -118,14 +118,14 @@ class BTree<T extends Comparable> {
 
   /// Calls the iterator for every value in the tree within the range
   /// [first, pivot), until iterator returns false.
-  void ascendLessThan(T pivot, ItemIterator iterator) {
+  void ascendLessThan(T pivot, ItemIterator<T> iterator) {
     if (_root == null) return;
     _root.iterate((T a) => true, (T a) => a.compareTo(pivot) < 0, iterator);
   }
 
   /// Calls the iterator for every value in the tree within
   /// the range [pivot, last], until iterator returns false.
-  void ascendGreaterOrEqual(T pivot, ItemIterator iterator) {
+  void ascendGreaterOrEqual(T pivot, ItemIterator<T> iterator) {
     if (_root == null) return;
     _root.iterate((T a) => a.compareTo(pivot) >= 0, (T a) => true, iterator);
   }
