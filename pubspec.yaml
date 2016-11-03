@@ -1,6 +1,6 @@
 name: btree
 description: An in-memory B-Tree implementation
-version: 0.1.0
+version: 0.1.1
 author: Kwang Yul Seo <kwangyul.seo@gmail.com>
 homepage: https://github.com/kseo/btree
 
@@ -8,8 +8,8 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 
 dependencies:
-  quiver_collection: '>=1.0.0-dev.1 <1.1.0'
-  quiver_check: '>=1.0.0-dev.1 <1.1.0'
+  quiver_collection: '>=1.0.0 <1.1.0'
+  quiver_check: '>=1.0.0 <1.1.0'
   tuple: '>=0.4.0 <0.5.0'
 
 dev_dependencies:
