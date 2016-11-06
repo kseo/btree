@@ -399,7 +399,7 @@ class _Children<T extends Comparable> extends DelegatingList<_Node<T>> {
 
 /// Returns the index of the given [key] in the sorted [list].
 /// If no such [key] is found, then returns `-(insertion point + 1)`.
-int _binarySearch(List<Comparable> list, Comparable key) {
+int _binarySearch/*<T extends Comparable>*/(List/*<T>*/ list, /*=T*/ key) {
   int min = 0;
   int max = list.length;
   while (min < max) {
