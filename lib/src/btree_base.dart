@@ -3,13 +3,12 @@
 
 library btree.base;
 
-import 'package:quiver_check/check.dart';
-import 'package:quiver_collection/collection.dart';
+import 'package:quiver/collection.dart';
 import 'package:tuple/tuple.dart';
 
 enum _RemoveType { removeItem, removeMin, removeMax }
 
-typedef bool ItemIterator<T>(T item);
+typedef ItemIterator<T> = bool Function(T item);
 
 /// [BTree] is an implementation of a B-Tree.
 ///
@@ -53,9 +52,9 @@ class BTree<T extends Comparable> {
   ///
   /// Adding `null` to the tree throws an [ArgumentError].
   T replaceOrInsert(T item) {
-    checkNotNull(item);
+    ArgumentError.checkNotNull(item);
     if (_root == null) {
-      _root = new _Node(this);
+      _root = _Node(this);
       _root.items.add(item);
       _length++;
       return null;
@@ -64,7 +63,7 @@ class BTree<T extends Comparable> {
       final item2 = result.item1;
       final second = result.item2;
       final oldRoot = _root;
-      _root = new _Node(this)
+      _root = _Node(this)
         ..items.add(item2)
         ..children.addAll([oldRoot, second]);
     }
@@ -140,11 +139,11 @@ class BTree<T extends Comparable> {
 
 /// [_Node] is an internal node in a tree.
 class _Node<T extends Comparable> {
-  final _Items<T> items = new _Items<T>();
+  final _Items<T> items = _Items<T>();
 
-  final _Children<T> children = new _Children<T>();
+  final _Children<T> children = _Children<T>();
 
-  final BTree tree;
+  final BTree<T> tree;
 
   _Node(this.tree);
 
@@ -153,14 +152,14 @@ class _Node<T extends Comparable> {
   /// a new node containing all items/children after it.
   Tuple2<T, _Node<T>> split(int i) {
     final item = items[i];
-    final next = new _Node(tree);
+    final next = _Node(tree);
     next.items.addAll(items.sublist(i + 1));
     items.length = i;
     if (children.isNotEmpty) {
       next.children.addAll(children.sublist(i + 1));
       children.length = i + 1;
     }
-    return new Tuple2<T, _Node<T>>(item, next);
+    return Tuple2<T, _Node<T>>(item, next);
   }
 
   /// Checks if a child should be split, and if so splits it.
@@ -227,7 +226,7 @@ class _Node<T extends Comparable> {
 
   /// Removes an item from the subtree rooted at this node.
   T remove(T item, int minItems, _RemoveType type) {
-    var i;
+    int i;
     var found = false;
     switch (type) {
       case _RemoveType.removeMax:
@@ -339,7 +338,8 @@ class _Node<T extends Comparable> {
   /// true for values less than or equal to values [to] returns true for,
   /// and [to] returns true for values greater than or equal to those that
   /// [from] does.
-  bool iterate(bool from(T), bool to(T), ItemIterator<T> iter) {
+  bool iterate(
+      bool Function(T) from, bool Function(T) to, ItemIterator<T> iter) {
     for (int i = 0; i < items.length; i++) {
       final item = items[i];
       if (!from(item)) {
@@ -363,8 +363,9 @@ class _Node<T extends Comparable> {
 }
 
 class _Items<T extends Comparable> extends DelegatingList<T> {
-  final List<T> _list = new List<T>();
+  final _list = <T>[];
 
+  @override
   List<T> get delegate => _list;
 
   /// Inserts a value into the given [index], pushing all subsequent values
@@ -377,16 +378,15 @@ class _Items<T extends Comparable> extends DelegatingList<T> {
   /// Returns the index of the given [item] in the list.
   Tuple2<int, bool> find(T item) {
     final i = _binarySearch(_list, item);
-    return i >= 0
-        ? new Tuple2<int, bool>(i, true)
-        : new Tuple2<int, bool>(~i, false);
+    return i >= 0 ? Tuple2<int, bool>(i, true) : Tuple2<int, bool>(~i, false);
   }
 }
 
 /// Stores child nodes in a node.
 class _Children<T extends Comparable> extends DelegatingList<_Node<T>> {
-  final List<_Node<T>> _list = new List<_Node<T>>();
+  final _list = <_Node<T>>[];
 
+  @override
   List<_Node<T>> get delegate => _list;
 
   /// Inserts a value into the given [index], pushing all subsequent values

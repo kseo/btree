@@ -1,24 +1,6 @@
-# Files and directories created by pub
-.buildlog
+# Files and directories created by pub.
+.dart_tool/
 .packages
-.project
-.pub/
+
+# Conventional directory for build output.
 build/
-packages
-pubspec.lock
-
-# Files created by dart2js
-*.dart.js
-*.part.js
-*.js.deps
-*.js.map
-*.info.json
-
-# Directory created by dartdoc
-doc/api/
-
-# JetBrains IDEs (WebStorm and IDEA are the recomended Dart IDEs) 
-.idea/
-*.iml
-*.ipr
-*.iws

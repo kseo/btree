@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 int identity(int a) => a;
 
 /// Returns an ordered list of int items in the range [0, n).
-List<int> rang(int n) => new List<int>.generate(n, identity);
+List<int> rang(int n) => List<int>.generate(n, identity);
 
 /// Returns a random permutation of [n] int items in the range [0, n).
 List<int> perm(int n) => rang(n)..shuffle();
@@ -29,7 +29,7 @@ void main() {
     const int btreeDegree = 32;
 
     test('TestBTree', () {
-      final btree = new BTree<int>(btreeDegree);
+      final btree = BTree<int>(btreeDegree);
       const int treeSize = 1000;
       for (int i = 0; i < 10; i++) {
         for (final item in perm(treeSize)) {
@@ -47,12 +47,12 @@ void main() {
     });
 
     test('TestRemoveMin', () {
-      final btree = new BTree<int>(3);
+      final btree = BTree<int>(3);
       for (final v in perm(100)) {
         btree.replaceOrInsert(v);
       }
       final got = [];
-      var v;
+      int v;
       while ((v = btree.removeMin()) != null) {
         got.add(v);
       }
@@ -60,12 +60,12 @@ void main() {
     });
 
     test('TestRemoveMax', () {
-      final btree = new BTree<int>(3);
+      final btree = BTree<int>(3);
       for (final v in perm(100)) {
         btree.replaceOrInsert(v);
       }
       final got = [];
-      var v;
+      int v;
       while ((v = btree.removeMax()) != null) {
         got.add(v);
       }
@@ -73,7 +73,7 @@ void main() {
     });
 
     test('TestAscendRange', () {
-      final btree = new BTree<int>(2);
+      final btree = BTree<int>(2);
       for (final v in perm(100)) {
         btree.replaceOrInsert(v);
       }
@@ -95,7 +95,7 @@ void main() {
     });
 
     test('TestAscendLessThan', () {
-      final btree = new BTree(btreeDegree);
+      final btree = BTree(btreeDegree);
       for (final v in perm(100)) {
         btree.replaceOrInsert(v);
       }
@@ -117,7 +117,7 @@ void main() {
     });
 
     test('AscendGreaterOrEqual', () {
-      final btree = new BTree(btreeDegree);
+      final btree = BTree(btreeDegree);
       for (final v in perm(100)) {
         btree.replaceOrInsert(v);
       }

@@ -6,7 +6,7 @@ library btree.example;
 import 'package:btree/btree.dart';
 
 main() {
-  final btree = new BTree<int>(3);
+  final btree = BTree<int>(3);
   for (var i = 0; i < 10; i++) {
     btree.replaceOrInsert(i);
   }
