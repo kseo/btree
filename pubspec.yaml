@@ -1,7 +1,6 @@
 name: btree
 description: An in-memory B-Tree implementation
-version: 0.1.1
-author: Kwang Yul Seo <kwangyul.seo@gmail.com>
+version: 0.2.0
 homepage: https://github.com/kseo/btree
 
 environment:
